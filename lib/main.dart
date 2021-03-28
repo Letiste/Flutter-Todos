@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -10,14 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.purple[800],
+        accentColor: Colors.purple[800],
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Todos'),
-        ),
-        body: Center(child: Text('Todos')),
-      ),
+      home: HomePage(),
     );
   }
 }
