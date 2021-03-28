@@ -1,0 +1,28 @@
+name: tests
+on: [push]
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Clone flutter
+        run: git clone https://github.com/flutter/flutter.git -b stable
+
+      - name: Update path
+        run: echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+
+      - name: Run flutter doctor
+        run: flutter doctor -v
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run linter
+        run: flutter analyze --no-pub
+
+      - name: Run tests
+        run: flutter test --no-pub
+            
