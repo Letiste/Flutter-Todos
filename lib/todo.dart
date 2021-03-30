@@ -1,11 +1,40 @@
 import 'package:flutter/material.dart';
 
-class Todo extends StatelessWidget {
+import 'edit_todo.dart';
+
+class Todo extends StatefulWidget {
   Todo({this.text, this.index, this.deleteTodo});
 
   final String text;
   final int index;
   final void Function(int) deleteTodo;
+
+  @override
+  _TodoState createState() => _TodoState();
+}
+
+class _TodoState extends State<Todo> {
+  String textTodo;
+
+  void editTodo(BuildContext context, String text) async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (BuildContext context) => EditTodo(text: text)),
+    );
+    setState(() {
+      print(textTodo);
+      textTodo = result;
+      print(textTodo);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('initstate');
+    textTodo = widget.text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +47,7 @@ class Todo extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                text,
+                textTodo,
                 style: TextStyle(
                   fontSize: 24,
                 ),
@@ -27,13 +56,15 @@ class Todo extends StatelessWidget {
             IconButton(
               color: Colors.purple[800],
               icon: Icon(Icons.edit),
-              onPressed: () {},
+              onPressed: () {
+                editTodo(context, textTodo);
+              },
             ),
             IconButton(
               color: Colors.purple[800],
               icon: Icon(Icons.delete),
               onPressed: () {
-                deleteTodo(index);
+                widget.deleteTodo(widget.index);
               },
             ),
           ],
