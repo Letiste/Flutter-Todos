@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 
-class Todos extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
-      itemBuilder: (context, index) => Todo(index: index),
-      itemCount: 20,
-    );
-  }
-}
+// class Todos extends StatelessWidget {
+//   final todos = <Todo>[];
+
+//   Todos(int index) {
+//     for (var i = 0; i < index; i++) {
+//       todos.add(Todo(text: 'Todo n°$i'));
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView(
+//       padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
+//       children: todos,
+//     );
+//   }
+// }
 
 class Todo extends StatelessWidget {
-  Todo({this.index});
+  Todo({this.text});
 
-  final int index;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,7 @@ class Todo extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                'Todo n°$index',
+                text,
                 style: TextStyle(
                   fontSize: 24,
                 ),
