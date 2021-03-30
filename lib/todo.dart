@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
 
-// class Todos extends StatelessWidget {
-//   final todos = <Todo>[];
-
-//   Todos(int index) {
-//     for (var i = 0; i < index; i++) {
-//       todos.add(Todo(text: 'Todo n°$i'));
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView(
-//       padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
-//       children: todos,
-//     );
-//   }
-// }
-
 class Todo extends StatelessWidget {
-  Todo({this.text});
+  Todo({this.text, this.index, this.deleteTodo});
 
   final String text;
+  final int index;
+  final void Function(int) deleteTodo;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +15,6 @@ class Todo extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Text(
@@ -49,7 +32,9 @@ class Todo extends StatelessWidget {
             IconButton(
               color: Colors.purple[800],
               icon: Icon(Icons.delete),
-              onPressed: () {},
+              onPressed: () {
+                deleteTodo(index);
+              },
             ),
           ],
         ),

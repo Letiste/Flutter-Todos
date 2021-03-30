@@ -17,7 +17,14 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(builder: (context) => NewTodo()),
     );
     setState(() {
-      todos.add(Todo(text: result));
+      todos.add(
+          Todo(text: result, index: todos.length, deleteTodo: _deleteTodo));
+    });
+  }
+
+  void _deleteTodo(int index) {
+    setState(() {
+      todos.removeWhere((todo) => todo.index == index);
     });
   }
 
@@ -28,9 +35,10 @@ class _HomePageState extends State<HomePage> {
         title: Text('TodosApp'),
         elevation: 8,
       ),
-      body: ListView(
+      body: ListView.builder(
         padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
-        children: todos,
+        itemBuilder: (_, index) => todos[index],
+        itemCount: todos.length,
       ),
       backgroundColor: Color.fromRGBO(245, 245, 245, 1),
       floatingActionButton: FloatingActionButton(
