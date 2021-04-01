@@ -34,6 +34,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('TodosApp'),
         elevation: 8,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.purple[500],
+                Colors.purple[800],
+              ],
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
@@ -43,9 +53,22 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color.fromRGBO(245, 245, 245, 1),
       floatingActionButton: FloatingActionButton(
         onPressed: _addTodo,
-        child: Icon(
-          Icons.add,
-          size: 36,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Colors.purple[500],
+                Colors.purple[800],
+              ],
+            ),
+          ),
+          child: Icon(
+            Icons.add,
+            size: 36,
+          ),
         ),
       ),
     );
