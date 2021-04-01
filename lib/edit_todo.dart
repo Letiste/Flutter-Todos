@@ -52,7 +52,23 @@ class _EditTodoState extends State<EditTodo> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pop(context, _controller.text),
-        child: Icon(Icons.check),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Colors.purple[500],
+                Colors.purple[800],
+              ],
+            ),
+          ),
+          child: Icon(
+            Icons.check,
+            size: 36,
+          ),
+        ),
       ),
       body: TextField(
         style: TextStyle(

@@ -30,7 +30,23 @@ class _NewTodoState extends State<NewTodo> {
         onPressed: () {
           Navigator.pop(context, todo);
         },
-        child: Icon(Icons.check),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Colors.purple[500],
+                Colors.purple[800],
+              ],
+            ),
+          ),
+          child: Icon(
+            Icons.check,
+            size: 36,
+          ),
+        ),
       ),
       body: TextField(
         style: TextStyle(
