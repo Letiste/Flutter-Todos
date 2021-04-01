@@ -38,36 +38,40 @@ class _TodoState extends State<Todo> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      elevation: 1.5,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                textTodo,
-                style: TextStyle(
-                  fontSize: 24,
+    return Dismissible(
+      key: Key(widget.index.toString()),
+      onDismissed: (_) => widget.deleteTodo(widget.index),
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        elevation: 1.5,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  textTodo,
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
                 ),
               ),
-            ),
-            IconButton(
-              color: Colors.purple[800],
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                editTodo(context, textTodo);
-              },
-            ),
-            IconButton(
-              color: Colors.purple[800],
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                widget.deleteTodo(widget.index);
-              },
-            ),
-          ],
+              IconButton(
+                color: Colors.purple[800],
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  editTodo(context, textTodo);
+                },
+              ),
+              IconButton(
+                color: Colors.purple[800],
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  widget.deleteTodo(widget.index);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
