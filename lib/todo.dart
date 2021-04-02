@@ -40,21 +40,14 @@ class _TodoState extends State<Todo> {
     return Dismissible(
       key: Key(widget.index.toString()),
       onDismissed: (_) => widget.deleteTodo(context, widget.index),
-      child: Card(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        elevation: 1.5,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      child: Container(
+        height: 90,
+        child: Card(
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          elevation: 1.5,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: Text(
-                  textTodo,
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                ),
-              ),
               IconButton(
                 color: Colors.purple[800],
                 icon: Icon(Icons.edit),
@@ -62,10 +55,18 @@ class _TodoState extends State<Todo> {
                   editTodo(context, textTodo);
                 },
               ),
-              IconButton(
-                color: Colors.purple[800],
-                icon: Icon(Icons.delete),
-                onPressed: () => widget.deleteTodo(context, widget.index),
+              Expanded(
+                child: CheckboxListTile(
+                  contentPadding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                  value: false,
+                  onChanged: (_) => widget.deleteTodo(context, widget.index),
+                  title: Text(
+                    textTodo,
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
