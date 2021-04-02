@@ -7,7 +7,7 @@ class Todo extends StatefulWidget {
 
   final String text;
   final int index;
-  final void Function(int) deleteTodo;
+  final void Function(BuildContext, int) deleteTodo;
 
   @override
   _TodoState createState() => _TodoState();
@@ -39,7 +39,7 @@ class _TodoState extends State<Todo> {
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key(widget.index.toString()),
-      onDismissed: (_) => widget.deleteTodo(widget.index),
+      onDismissed: (_) => widget.deleteTodo(context, widget.index),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         elevation: 1.5,
@@ -65,9 +65,7 @@ class _TodoState extends State<Todo> {
               IconButton(
                 color: Colors.purple[800],
                 icon: Icon(Icons.delete),
-                onPressed: () {
-                  widget.deleteTodo(widget.index);
-                },
+                onPressed: () => widget.deleteTodo(context, widget.index),
               ),
             ],
           ),

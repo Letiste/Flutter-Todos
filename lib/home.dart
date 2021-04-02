@@ -24,10 +24,24 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _deleteTodo(int index) {
+  void _deleteTodo(BuildContext context, int index) {
     setState(() {
       todos.removeWhere((todo) => todo.index == index);
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Todo deleted',
+          style: TextStyle(color: Colors.purple[800]),
+        ),
+        behavior: SnackBarBehavior.floating,
+        duration: Duration(milliseconds: 1500),
+        elevation: 4,
+        backgroundColor: Color.fromRGBO(245, 245, 245, 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
   }
 
   @override
