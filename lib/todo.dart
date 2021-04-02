@@ -22,17 +22,16 @@ class _TodoState extends State<Todo> {
       MaterialPageRoute(
           builder: (BuildContext context) => EditTodo(text: text)),
     );
-    setState(() {
-      print(textTodo);
-      textTodo = result;
-      print(textTodo);
-    });
+    if (result.toString().isNotEmpty) {
+      setState(() {
+        textTodo = result;
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    print('initstate');
     textTodo = widget.text;
   }
 
