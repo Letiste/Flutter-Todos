@@ -19,6 +19,16 @@ class _NewTodoState extends State<NewTodo> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add a todo'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.purple[500],
+                Colors.purple[800],
+              ],
+            ),
+          ),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -27,21 +37,26 @@ class _NewTodoState extends State<NewTodo> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context, todo);
-        },
+        backgroundColor: Colors.grey,
+        onPressed: todo.isEmpty
+            ? null
+            : () {
+                Navigator.pop(context, todo);
+              },
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                Colors.purple[500],
-                Colors.purple[800],
-              ],
-            ),
-          ),
+          decoration: todo.isEmpty
+              ? null
+              : BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.purple[500],
+                      Colors.purple[800],
+                    ],
+                  ),
+                ),
           child: Icon(
             Icons.check,
             size: 36,

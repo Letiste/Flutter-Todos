@@ -16,10 +16,12 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(builder: (context) => NewTodo()),
     );
-    setState(() {
-      todos.add(
-          Todo(text: result, index: todos.length, deleteTodo: _deleteTodo));
-    });
+    if (result.toString().isNotEmpty) {
+      setState(() {
+        todos.add(
+            Todo(text: result, index: todos.length, deleteTodo: _deleteTodo));
+      });
+    }
   }
 
   void _deleteTodo(int index) {

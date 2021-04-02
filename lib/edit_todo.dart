@@ -27,11 +27,19 @@ class EditTodo extends StatefulWidget {
 
 class _EditTodoState extends State<EditTodo> {
   final TextEditingController _controller = TextEditingController();
+  bool _isEmpty = false;
+
+  void _handleIsEmpty() {
+    setState(() {
+      _isEmpty = _controller.text.isEmpty;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _controller.text = widget.text;
+    _controller.addListener(_handleIsEmpty);
   }
 
   @override
@@ -45,18 +53,8 @@ class _EditTodoState extends State<EditTodo> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit todo'),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pop(context, _controller.text),
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
+        flexibleSpace: Container(
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
             gradient: LinearGradient(
               colors: [
                 Colors.purple[500],
@@ -64,6 +62,33 @@ class _EditTodoState extends State<EditTodo> {
               ],
             ),
           ),
+        ),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey,
+        onPressed: _isEmpty
+            ? null
+            : () {
+                Navigator.pop(context, _controller.text);
+              },
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: _isEmpty
+              ? null
+              : BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.purple[500],
+                      Colors.purple[800],
+                    ],
+                  ),
+                ),
           child: Icon(
             Icons.check,
             size: 36,
