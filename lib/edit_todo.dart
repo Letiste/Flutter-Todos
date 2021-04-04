@@ -70,6 +70,8 @@ class _EditTodoState extends State<EditTodo> {
                 Card(
                   child: TextField(
                     controller: _controller,
+                    onSubmitted: (_) =>
+                        Navigator.pop(context, _controller.text),
                     autofocus: true,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
