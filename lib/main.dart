@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.light().copyWith(
-        primaryColor: Colors.purple[800],
-        accentColor: Colors.purple[800],
+        primaryColor: Colors.deepPurple[800],
+        accentColor: Colors.deepPurple[800],
       ),
       home: HomePage(),
     );

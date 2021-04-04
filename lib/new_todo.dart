@@ -58,7 +58,7 @@ class _NewTodoState extends State<NewTodo> {
                           vertical: 8, horizontal: 16),
                       hintText: 'To do :',
                     ),
-                    cursorColor: Colors.purple[800],
+                    cursorColor: Colors.deepPurple[800],
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -70,7 +70,7 @@ class _NewTodoState extends State<NewTodo> {
                         Navigator.pop(context);
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.purple[800],
+                        primary: Colors.deepPurple[800],
                       ),
                       child: Text(
                         'CANCEL',
@@ -88,14 +88,11 @@ class _NewTodoState extends State<NewTodo> {
                               Navigator.pop(context, _controller.text);
                             },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.purple[800],
+                        primary: Colors.deepPurple[800],
                       ),
                       child: Text(
                         'ADD',
-                        style: TextStyle(
-                            fontSize: 18,
-                            // color: Colors.purple[800],
-                            letterSpacing: 0.5),
+                        style: TextStyle(fontSize: 18, letterSpacing: 0.5),
                       ),
                     ),
                   ],

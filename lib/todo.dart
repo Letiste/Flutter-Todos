@@ -60,7 +60,7 @@ class _TodoState extends State<Todo> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               IconButton(
-                color: Colors.purple[800],
+                color: Colors.deepPurple[800],
                 icon: Icon(Icons.edit),
                 onPressed: () {
                   editTodo(context, textTodo);
