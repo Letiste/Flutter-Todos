@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       SnackBar(
         content: Text(
           'Todo deleted',
-          style: TextStyle(color: Colors.purple[800]),
+          style: TextStyle(color: Colors.deepPurple[800]),
         ),
         behavior: SnackBarBehavior.floating,
         duration: Duration(milliseconds: 1500),
@@ -86,8 +86,8 @@ class _HomePageState extends State<HomePage> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.purple[500],
-                Colors.purple[800],
+                Colors.deepPurple[500],
+                Colors.deepPurple[800],
               ],
             ),
           ),
@@ -108,8 +108,8 @@ class _HomePageState extends State<HomePage> {
             shape: BoxShape.circle,
             gradient: LinearGradient(
               colors: [
-                Colors.purple[500],
-                Colors.purple[800],
+                Colors.deepPurple[500],
+                Colors.deepPurple[800],
               ],
             ),
           ),
