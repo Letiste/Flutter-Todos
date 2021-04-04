@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edit_todo.dart';
 
 class Todo extends StatefulWidget {
-  Todo({this.text, this.index, this.deleteTodo});
+  Todo({this.text, this.keyString, this.deleteTodo})
+      : super(key: Key(keyString));
 
   final String text;
-  final int index;
-  final void Function(BuildContext, int) deleteTodo;
+
+  final String keyString;
+
+  final void Function(BuildContext, String) deleteTodo;
 
   @override
   _TodoState createState() => _TodoState();
@@ -22,10 +26,12 @@ class _TodoState extends State<Todo> {
       MaterialPageRoute(
           builder: (BuildContext context) => EditTodo(text: text)),
     );
-    if (result.toString().isNotEmpty) {
+    if (result != null && result.toString().isNotEmpty) {
       setState(() {
         textTodo = result;
       });
+      var prefs = await SharedPreferences.getInstance();
+      await prefs.setString(widget.keyString, result.toString());
     }
   }
 
@@ -38,8 +44,8 @@ class _TodoState extends State<Todo> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(widget.index.toString()),
-      onDismissed: (_) => widget.deleteTodo(context, widget.index),
+      key: widget.key,
+      onDismissed: (_) => widget.deleteTodo(context, widget.keyString),
       child: Container(
         height: 90,
         child: Card(
@@ -59,7 +65,8 @@ class _TodoState extends State<Todo> {
                 child: CheckboxListTile(
                   contentPadding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                   value: false,
-                  onChanged: (_) => widget.deleteTodo(context, widget.index),
+                  onChanged: (_) =>
+                      widget.deleteTodo(context, widget.keyString),
                   title: Text(
                     textTodo,
                     style: TextStyle(
