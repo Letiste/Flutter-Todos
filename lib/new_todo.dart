@@ -50,6 +50,8 @@ class _NewTodoState extends State<NewTodo> {
                 Card(
                   child: TextField(
                     controller: _controller,
+                    onSubmitted: (_) =>
+                        Navigator.pop(context, _controller.text),
                     autofocus: true,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
