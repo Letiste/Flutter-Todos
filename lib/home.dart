@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'new_todo.dart';
 import 'todo.dart';
@@ -9,25 +10,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Todo> todos = [];
+  final Map<String, Todo> _todos = <String, Todo>{};
+  // SplayTreeMap<String, Todo> _todos = SplayTreeMap();
 
   void _addTodo() async {
     var result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => NewTodo()),
     );
-    if (result.toString().isNotEmpty) {
+    if (result != null && result.toString().isNotEmpty) {
+      var key = DateTime.now().toString();
       setState(() {
-        todos.add(
-            Todo(text: result, index: todos.length, deleteTodo: _deleteTodo));
+        _todos[key] =
+            Todo(text: result, keyString: key, deleteTodo: _deleteTodo);
       });
+      var prefs = await SharedPreferences.getInstance();
+      await prefs.setString(key, result.toString());
     }
   }
 
-  void _deleteTodo(BuildContext context, int index) {
+  void _deleteTodo(BuildContext context, String keyString) {
     setState(() {
-      todos.removeWhere((todo) => todo.index == index);
+      _todos.remove(keyString);
     });
+
+    SharedPreferences.getInstance().then((prefs) => prefs.remove(keyString));
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -42,6 +49,22 @@ class _HomePageState extends State<HomePage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      var keys = prefs.getKeys();
+      setState(() {
+        keys.forEach((key) {
+          _todos[key] = Todo(
+              text: prefs.getString(key),
+              keyString: key,
+              deleteTodo: _deleteTodo);
+        });
+      });
+    });
   }
 
   @override
@@ -63,8 +86,8 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
-        itemBuilder: (_, index) => todos[index],
-        itemCount: todos.length,
+        itemBuilder: (_, index) => _todos.entries.elementAt(index).value,
+        itemCount: _todos.length,
       ),
       backgroundColor: Color.fromRGBO(245, 245, 245, 1),
       floatingActionButton: FloatingActionButton(
