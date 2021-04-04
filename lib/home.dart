@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,18 +17,14 @@ class _HomePageState extends State<HomePage> {
 
   void _addTodo() async {
     var result = await Navigator.push(
-        context,
-        DialogRoute(
-          barrierColor: Color.fromRGBO(50, 50, 50, 0.3),
-          barrierDismissible: true,
-          context: context,
-          builder: (context) => NewTodo(),
-        )
-        // MaterialPageRoute(
-        //   fullscreenDialog: false,
-        //   builder: (context) => NewTodo(),
-        // ),
-        );
+      context,
+      DialogRoute(
+        barrierColor: Color.fromRGBO(50, 50, 50, 0.3),
+        barrierDismissible: true,
+        context: context,
+        builder: (context) => NewTodo(),
+      ),
+    );
     if (result != null && result.toString().isNotEmpty) {
       var key = DateTime.now().toString();
       setState(() {
@@ -93,10 +91,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
-        itemBuilder: (_, index) => _todos.entries.elementAt(index).value,
-        itemCount: _todos.length,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            verticalDirection: VerticalDirection.up,
+            children: [
+              SizedBox(height: 100),
+              ..._todos.values.toList(),
+              SizedBox(height: 25)
+            ],
+            // padding: const EdgeInsets.fromLTRB(0, 16, 0, 64),
+            // itemBuilder: (_, index) => _todos.entries.elementAt(index).value,
+            // itemCount: _todos.length,
+          ),
+        ),
       ),
       backgroundColor: Color.fromRGBO(245, 245, 245, 1),
       floatingActionButton: FloatingActionButton(
