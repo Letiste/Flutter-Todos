@@ -15,9 +15,18 @@ class _HomePageState extends State<HomePage> {
 
   void _addTodo() async {
     var result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NewTodo()),
-    );
+        context,
+        DialogRoute(
+          barrierColor: Color.fromRGBO(50, 50, 50, 0.3),
+          barrierDismissible: true,
+          context: context,
+          builder: (context) => NewTodo(),
+        )
+        // MaterialPageRoute(
+        //   fullscreenDialog: false,
+        //   builder: (context) => NewTodo(),
+        // ),
+        );
     if (result != null && result.toString().isNotEmpty) {
       var key = DateTime.now().toString();
       setState(() {

@@ -22,10 +22,15 @@ class _TodoState extends State<Todo> {
 
   void editTodo(BuildContext context, String text) async {
     var result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (BuildContext context) => EditTodo(text: text)),
-    );
+        context,
+        DialogRoute(
+          barrierColor: Color.fromRGBO(50, 50, 50, 0.3),
+          barrierDismissible: true,
+          context: context,
+          builder: (context) => EditTodo(
+            text: textTodo,
+          ),
+        ));
     if (result != null && result.toString().isNotEmpty) {
       setState(() {
         textTodo = result;
