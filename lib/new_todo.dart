@@ -30,6 +30,7 @@ class _NewTodoState extends State<NewTodo> {
 
   @override
   Widget build(BuildContext context) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
