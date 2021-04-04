@@ -51,59 +51,76 @@ class _EditTodoState extends State<EditTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Edit todo'),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.purple[500],
-                Colors.purple[800],
+      backgroundColor: Colors.transparent,
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+            color: Color.fromRGBO(245, 245, 245, 1),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Card(
+                  child: TextField(
+                    controller: _controller,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      hintText: 'To do :',
+                    ),
+                    cursorColor: Colors.purple[800],
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Colors.purple[800],
+                      ),
+                      child: Text(
+                        'CANCEL',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey[700],
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: _isEmpty
+                          ? null
+                          : () {
+                              Navigator.pop(context, _controller.text);
+                            },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.purple[800],
+                      ),
+                      child: Text(
+                        'EDIT',
+                        style: TextStyle(
+                            fontSize: 18,
+                            // color: Colors.purple[800],
+                            letterSpacing: 0.5),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-        ),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey,
-        onPressed: _isEmpty
-            ? null
-            : () {
-                Navigator.pop(context, _controller.text);
-              },
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: _isEmpty
-              ? null
-              : BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.purple[500],
-                      Colors.purple[800],
-                    ],
-                  ),
-                ),
-          child: Icon(
-            Icons.check,
-            size: 36,
-          ),
-        ),
-      ),
-      body: TextField(
-        style: TextStyle(
-          fontSize: 24,
-        ),
-        autofocus: true,
-        expands: true,
-        maxLength: null,
-        maxLines: null,
-        controller: _controller,
+        ],
       ),
     );
   }
