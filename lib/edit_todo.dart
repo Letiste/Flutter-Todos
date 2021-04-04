@@ -50,6 +50,7 @@ class _EditTodoState extends State<EditTodo> {
 
   @override
   Widget build(BuildContext context) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
