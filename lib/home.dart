@@ -65,10 +65,11 @@ class _HomePageState extends State<HomePage> {
       var keys = prefs.getKeys();
       setState(() {
         keys.forEach((key) {
-          _todos[key] = Todo(
-              text: prefs.getString(key),
-              keyString: key,
-              deleteTodo: _deleteTodo);
+          var value = prefs.getString(key);
+          if (value != null) {
+            _todos[key] =
+                Todo(text: value, keyString: key, deleteTodo: _deleteTodo);
+          }
         });
       });
     });
@@ -84,8 +85,8 @@ class _HomePageState extends State<HomePage> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple[500],
-                Colors.deepPurple[800],
+                Colors.deepPurple.shade500,
+                Colors.deepPurple.shade800,
               ],
             ),
           ),
@@ -116,8 +117,8 @@ class _HomePageState extends State<HomePage> {
             shape: BoxShape.circle,
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple[500],
-                Colors.deepPurple[800],
+                Colors.deepPurple.shade500,
+                Colors.deepPurple.shade800,
               ],
             ),
           ),

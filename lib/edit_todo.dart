@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Test extends StatefulWidget {
-  final int number;
-
-  Test({this.number});
-
-  @override
-  _TestState createState() => _TestState();
-}
-
-class _TestState extends State<Test> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 class EditTodo extends StatefulWidget {
-  EditTodo({this.text});
+  EditTodo({required this.text});
 
   final String text;
 
