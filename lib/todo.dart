@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'edit_todo.dart';
 
 class Todo extends StatefulWidget {
-  Todo({this.text, this.keyString, this.deleteTodo})
+  Todo({required this.text, required this.keyString, required this.deleteTodo})
       : super(key: Key(keyString));
 
   final String text;
@@ -18,11 +18,11 @@ class Todo extends StatefulWidget {
 }
 
 class _TodoState extends State<Todo> with TickerProviderStateMixin {
-  String textTodo;
-  AnimationController _controllerOffset;
-  AnimationController _controllerSize;
-  Animation<Offset> _offsetAnimation;
-  Animation<double> _sizeAnimation;
+  late String textTodo;
+  late AnimationController _controllerOffset;
+  late AnimationController _controllerSize;
+  late Animation<Offset> _offsetAnimation;
+  late Animation<double> _sizeAnimation;
   bool _isVisible = true;
 
   void _editTodo(BuildContext context, String text) async {
@@ -100,7 +100,7 @@ class _TodoState extends State<Todo> with TickerProviderStateMixin {
         child: SlideTransition(
           position: _offsetAnimation,
           child: Dismissible(
-            key: widget.key,
+            key: Key(widget.keyString),
             onDismissed: (_) => widget.deleteTodo(context, widget.keyString),
             child: Container(
               height: 90,
